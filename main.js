@@ -1,6 +1,10 @@
 
+var personalInformation =[] 
 var q11 = []
-var q15 = [] 
+var q12 = []
+var q15 = []
+var q17 = []
+var q18 = []
 var responses = []
 function disableInputNumberQuestion2(option){
   if(option.checked == true)
@@ -136,56 +140,43 @@ function disableOptionsQ12(option){
 function disableInputNumberQuestion17Casas(option){
   if(option.checked == true){
     document.getElementById("q17o1").disabled = true
-    document.getElementById("q17o1").value = "N/A"
+    document.getElementById("q17o1").value = ""
+    document.getElementById("q18o10casas").checked = true
   }
   else if(option.checked == false){
     document.getElementById("q17o1").disabled = false
+    document.getElementById("q18o10casas").checked = false
   }
 }
 function disableInputNumberQuestion17Condominios(option){
   if(option.checked == true){
     document.getElementById("q17o3").disabled = true
-    document.getElementById("q17o3").value = "N/A"
+    document.getElementById("q17o3").value = ""
+    document.getElementById("q18o10condominios").checked = true
   }
   else if(option.checked == false){
     document.getElementById("q17o3").disabled = false
+    document.getElementById("q18o10condominios").checked = false
   }
 }
 function disableInputNumberQuestion17Lotes(option){
   if(option.checked == true){
     document.getElementById("q17o5").disabled = true
-    document.getElementById("q17o1").value = "N/A"
+    document.getElementById("q17o5").value = ""
+    document.getElementById("q18o10lotes").checked = true
+
   }
   else if(option.checked == false){
     document.getElementById("q17o5").disabled = false
+    document.getElementById("q18o10lotes").checked = false
   }
 }
-
-
-// function disableInputNumberQuestion13(option){
-//   if(option.checked == true){
-//     document.getElementById("q13o1").disabled = true
-//     document.getElementById("q13o1").value = ""
-//   }
-//   else if(option.checked == false){
-//     document.getElementById("q13o1").disabled = false
-//   }
-// }
-// function disableInputNumberQuestion14(option){
-//   if(option.checked == true){
-//     document.getElementById("q14o1").disabled = true
-//     document.getElementById("q14o1").value = ""
-//   }
-//   else if(option.checked == false){
-//     document.getElementById("q14o1").disabled = false
-//   }
-// }
-
 function getValues(){
   prePersonalInformation = Array.from(document.getElementsByName("personalInformation"))
   for(i = 0; i <= prePersonalInformation.length - 1; i++){
-    responses.push(prePersonalInformation[i].value)
+    personalInformation.push(prePersonalInformation[i].value)
   }
+  responses.push(personalInformation)
   preQ1 = Array.from(document.getElementsByName("q1"))
   for(i = 0; i <= preQ1.length - 1; i++){
     if(preQ1[i].checked == true){
@@ -203,10 +194,7 @@ function getValues(){
   }
   preQ3 = Array.from(document.getElementsByName("q3"))
   for(i = 0; i <= preQ3.length - 1; i++){
-    if(preQ3[i].type == "number" && preQ3[i].value !== ""){
-      responses.push(preQ3[i].value)
-    }
-    else if(preQ3[i].type == "checkbox" && preQ3[i].checked == true){
+    if(preQ3[i].checked == true){
       responses.push(preQ3[i].value)
     }
   }
@@ -227,7 +215,10 @@ function getValues(){
   }
   preQ6 = Array.from(document.getElementsByName("q6"))
   for(i = 0; i <= preQ6.length - 1; i++){
-    if(preQ6[i].checked == true){
+    if(preQ6[i].type == "number" && preQ6[i].value !== ""){
+      responses.push(preQ6[i].value)
+    }
+    else if(preQ6[i].type == "checkbox" && preQ6[i].checked == true){
       responses.push(preQ6[i].value)
     }
   }
@@ -264,117 +255,167 @@ function getValues(){
   responses.push(q11)
   preQ12 = Array.from(document.getElementsByName("q12"))
   for(i = 0; i <= preQ12.length - 1; i++){
-    if(preQ12[i].type == "number" && preQ12[i].value !== ""){
-      responses.push(preQ12[i].value)
-    }
-    else if(preQ12[i].type == "checkbox" && preQ12[i].checked == true){
-      responses.push(preQ12[i].value)
+    if(preQ12[i].checked == true || preQ12[i].type == "text"){
+      q12.push(preQ12[i].value)
     }
   }
+  responses.push(q12)
   preQ13 = Array.from(document.getElementsByName("q13"))
   for(i = 0; i <= preQ13.length - 1; i++){
-    if(preQ13[i].type == "number" && preQ13[i].value !== ""){
-      responses.push(preQ13[i].value)
-    }
-    else if(preQ13[i].type == "checkbox" && preQ13[i].checked == true){
+    if(preQ13[i].checked == true){
       responses.push(preQ13[i].value)
     }
   }
   preQ14 = Array.from(document.getElementsByName("q14"))
   for(i = 0; i <= preQ14.length - 1; i++){
-    if(preQ14[i].type == "number" && preQ14[i].value !== ""){
-      responses.push(preQ14[i].value)
-    }
-    else if(preQ14[i].type == "checkbox" && preQ14[i].checked == true){
-      responses.push(preQ14[i].value)
-    }
+    responses.push(preQ14[i].value)
   }
   preQ15 = Array.from(document.getElementsByName("q15"))
   for(i = 0; i <= preQ15.length - 1; i++){
-    if(preQ15[i].checked == true || preQ15[i].type == "text"){
-      q15.push(preQ15[i].value)
+    if(preQ15[i].checked == true){
+      responses.push(preQ15[i].value)
     }
   }
-  responses.push(q15)
-  preQ16 = Array.from(document.getElementsByName("q16"))
-  for(i = 0; i <= preQ16.length - 1; i++){
-    if(preQ16[i].checked == true){
-      responses.push(preQ16[i].value)
-    }
-  }
+  responses.push(document.getElementById("q16response").value)
   preQ17 = Array.from(document.getElementsByName("q17"))
   for(i = 0; i <= preQ17.length - 1; i++){
     if(preQ17[i].type == "number" && preQ17[i].value !== ""){
-      responses.push(preQ17[i].value)
+      q17.push(preQ17[i].value)
+    }
+    else if(preQ17[i].type == "checkbox" && preQ17[i].checked == true){
+      q17.push(preQ17[i].value)
     }
   }
-  preQ18 = Array.from(document.getElementsByName("q18"))
-  for(i = 0; i <= preQ18.length - 1; i++){
-    if(preQ18[i].checked == true){
-      responses.push(preQ18[i].value)
+  responses.push(q17)
+  preQ18casas = Array.from(document.getElementsByName("q18casas"))
+  for(i = 0; i <= preQ18casas.length - 1; i++){
+    if(preQ18casas[i].checked == true){
+      q18.push(preQ18casas[i].value)
     }
   }
-  responses.push(document.getElementById("q19response").value)
+  preQ18condominios = Array.from(document.getElementsByName("q18condominios"))
+  for(i = 0; i <= preQ18condominios.length - 1; i++){
+    if(preQ18condominios[i].checked == true){
+      q18.push(preQ18condominios[i].value)
+    }
+  }
+  preQ18lotes = Array.from(document.getElementsByName("q18lotes"))
+  for(i = 0; i <= preQ18lotes.length - 1; i++){
+    if(preQ18lotes[i].checked == true){
+      q18.push(preQ18lotes[i].value)
+    }
+  }
+  responses.push(q18)
   console.log(responses)
   validateInformation(responses)
 }
 function validateInformation(array) {
   // Error
-  if(array.length < 21){
+  if(array.length < 19){
     Swal.fire({
       icon: "error",
       title: "Faltan preguntas por responder",
       confirmButtonColor: "#3085d6"
     })
+    personalInformation = []
     q11 = []
+    q12 = []
     q15 = []
+    q17 = []
+    q18 = []
     responses = []
   }
-  else if(array[1] == ""){
-    Swal.fire({
-      icon: "info",
-      title: "Falta que escribas el nombre de tu empresa",
-      confirmButtonColor: "#3085d6"
-    })
-    q11 = []
-    q15 = []
-    responses = []
-  }
-  else if(array.length == 23){
-    Swal.showLoading();
-    sendData(array)
+  else if(array.length == 19){
+    if(array[0][1] == ""){
+      errorAtSendingData("personalInformation")
+    }
+    else if(array[14] == ""){
+      errorAtSendingData("q14")
+    }
+    else if(array[17].length < 3){
+      errorAtSendingData("q17")
+    }
+    else if(array[18].length < 3){
+      errorAtSendingData("q18")
+    }
+    else {
+      sendData(array)
+    }
   }
 }
+function errorAtSendingData(errorType){
+  if(errorType == "personalInformation"){
+    Swal.fire({
+      icon: "error",
+      title: "Falta el nombre de la empresa",
+      confirmButtonColor: "#3085d6"
+    })
+  }
+  else if(errorType == "q14"){
+    Swal.fire({
+      icon: "error",
+      title: "Falta responder la pregunta 14",
+      confirmButtonColor: "#3085d6"
+    })
+  }
+  else if(errorType == "q17"){
+    Swal.fire({
+      icon: "error",
+      title: "Falta algún dato en la pregunta 17",
+      confirmButtonColor: "#3085d6"
+    })
+  }
+  else if(errorType == "q18"){
+    Swal.fire({
+      icon: "error",
+      title: "Falta alguna selección en la pregunta 18",
+      confirmButtonColor: "#3085d6"
+    })
+  }
+  personalInformation = []
+  q11 = []
+  q12 = []
+  q15 = []
+  q17 = []
+  q18 = []
+  responses = []
+}
 function sendData(array) {
+  Swal.fire({
+    title: "Enviando información",
+    didOpen: () => {
+      Swal.showLoading();
+    }
+  })
     var data = JSON.stringify({
-      nombre: `${array[0]}`,
-      empresa: `${array[1]}`,
-      correo: `${array[2]}`,
-      telefono: `${array[3]}`,
-      q1: `${array[4]}`,
-      q2: `${array[5]}`,
-      q3: `${array[6]}`,
-      q4: `${array[7]}`,
-      q5: `${array[8]}`,
-      q6: `${array[9]}`,
-      q7: `${array[10]}`,
-      q8: `${array[11]}`,
-      q9: `${array[12]}`,
-      q10: `${array[13]}`,
-      q11: `${array[14]}`,
-      q12: `${array[15]}`,
-      q13: `${array[16]}`,
-      q14: `${array[17]}`,
-      q15: `${array[18]}`,
-      q16: `${array[19]}`,
-      q17: `${array[20]}`,
-      q18: `${array[21]}`,
-      q19: `${array[22]}`,
+      nombre: `${array[0][0]}`,
+      empresa: `${array[0][1]}`,
+      correo: `${array[0][2]}`,
+      telefono: `${array[0][3]}`,
+      q1: `${array[1]}`,
+      q2: `${array[2]}`,
+      q3: `${array[3]}`,
+      q4: `${array[4]}`,
+      q5: `${array[5]}`,
+      q6: `${array[6]}`,
+      q7: `${array[7]}`,
+      q8: `${array[8]}`,
+      q9: `${array[9]}`,
+      q10: `${array[10]}`,
+      q11: `${array[11]}`,
+      q12: `${array[12]}`,
+      q13: `${array[13]}`,
+      q14: `${array[14]}`,
+      q15: `${array[15]}`,
+      q16: `${array[16]}`,
+      q17: `${array[17]}`,
+      q18: `${array[18]}`,
+      q19: `${array[19]}`,
     });
     // sheet.best
     var config = {
       method: "post",
-      url: "https://sheet.best/api/sheets/32aacf91-902e-4e88-8d70-e596b2f41ceb/tabs/trim42023",
+      url: "https://sheet.best/api/sheets/32aacf91-902e-4e88-8d70-e596b2f41ceb/tabs/encuesta2023",
       mode: "cors",
       headers: {
         "Content-Type": "application/json",
